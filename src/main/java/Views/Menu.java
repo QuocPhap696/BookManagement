@@ -1,6 +1,7 @@
 package Views;
 
 import Model.Book;
+import Model.Role;
 import Model.User;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class Menu {
     private static boolean isFinished = false;
 
     public static void  boss(){
+
         boolean isLoggedIn = checkLogin();
         if (!isLoggedIn){
             login();
@@ -25,11 +27,10 @@ public class Menu {
         int number = 0;
         while (!isFinishep){
             try {
-                System.out.println("Chọn chức năng");
-                System.out.println("=>");
+                System.out.println("════ Chọn chức năng ════");
                 number =Integer.parseInt(scanner.nextLine());
             }catch (NumberFormatException e){
-                System.out.println("*** Nhập ko đúng, vui lòng nhập lại ***");
+                System.out.println("════ Nhập ko đúng, vui lòng nhập lại ════");
                 number = 0;
                 continue;
             }
@@ -55,10 +56,8 @@ public class Menu {
                 case 7:
                     exit();
                     break;
-//                case 8:
-//                    bookView.setStatus();
                 default:
-                    System.out.println("*** Vui lòng nhập từ 1 đến 7 ***");
+                    System.out.println("════ Vui lòng nhập từ 1 đến 7 ════");
                     chon();
                     break;
 
@@ -78,7 +77,7 @@ public class Menu {
             }catch (IllegalArgumentException e){
                 System.out.println(e.getMessage());
             } catch (Exception e){
-                System.out.println("*** Lỗi, vui lòng nhập lại ***");
+                System.out.println("════ Lỗi, vui lòng nhập lại ════");
                 return null;
             }
         }
@@ -102,7 +101,7 @@ public class Menu {
             try {
                 number = Integer.parseInt(scanner.nextLine());
             }catch (NumberFormatException e){
-                System.out.println("*** Nhập sai, vui lòng nhập lại ***");
+                System.out.println("════════ Nhập sai, vui lòng nhập lại ════════");
                 number = 0;
                 continue;
             }
@@ -142,12 +141,12 @@ public class Menu {
     }
 
     public static void exit(){
-        System.out.println("=====================");
-        System.out.println("|                   |");
-        System.out.println("|    Thank you !    |");
-        System.out.println("|  See you later !  |");
-        System.out.println("|                   |");
-        System.out.println("=====================");
+        System.out.println("╔═══════════════════════╗");
+        System.out.println("║                       ║");
+        System.out.println("║       Thank you !     ║");
+        System.out.println("║      See you later !  ║");
+        System.out.println("║                       ║");
+        System.out.println("╚═══════════════════════╝");
         System.exit(0);
     }
 
@@ -157,10 +156,10 @@ public class Menu {
         do {
             menuMain();
             try {
-                System.out.println("Chọn chức năng");
+                System.out.println("═══ Chọn chức năng ═══");
                 number = Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e){
-                System.out.println("*** Nhập sai, vui lòng nhập lại ***");
+                System.out.println("═══ Nhập sai, vui lòng nhập lại ═══");
                 number = 0;
                 continue;
             }
@@ -177,7 +176,7 @@ public class Menu {
                     action=true;
                     break;
                 default:
-                    System.out.println("*** Không hợp lệ, vui lòng nhập lại ***");
+                    System.out.println("═══ Không hợp lệ, vui lòng nhập lại ═══");
                     chon();
                     break;
             }
@@ -185,36 +184,36 @@ public class Menu {
     }
 
     public static void menuMain(){
-        System.out.println(" _________     Menu   __________");
-        System.out.println("|                               |");
-        System.out.println("|       1.    Chủ               |");
-        System.out.println("|       2.    Khách             |");
-        System.out.println("|       3.    Thoát             |");
-        System.out.println("|                               |");
-        System.out.println(" _______________________________");
+        System.out.println("╔═════════════  Menu   ══════════╗");
+        System.out.println("║                                ║");
+        System.out.println("║          1.    Chủ             ║");
+        System.out.println("║          2.    Khách           ║");
+        System.out.println("║          3.    Thoát           ║");
+        System.out.println("║                                ║");
+        System.out.println("╚════════════════════════════════╝");
     }
 
     public static void menuBoss(){
-        System.out.println("--------------- Menu Chủ ----------------");
-        System.out.println("|           1.Hiển thị danh sách        |");
-        System.out.println("|           2.Thêm sách mới             |");
-        System.out.println("|           3.Sửa thông tin sách        |");
-        System.out.println("|           4.Tìm kiếm sách theo tên    |");
-        System.out.println("|           5.Xoá sách theo ID          |");
-        System.out.println("|           6.Quay lại                  |");
-        System.out.println("|           7.Thoát                     |");
-        System.out.println("-----------------------------------------");
+        System.out.println("╔══════════════════  Chủ  ═══════════════╗");
+        System.out.println("║           1.Hiển thị danh sách         ║");
+        System.out.println("║           2.Thêm sách mới              ║");
+        System.out.println("║           3.Sửa thông tin sách         ║");
+        System.out.println("║           4.Tìm kiếm sách theo tên     ║");
+        System.out.println("║           5.Xoá sách theo ID           ║");
+        System.out.println("║           6.Quay lại                   ║");
+        System.out.println("║           7.Thoát                      ║");
+        System.out.println("╚════════════════════════════════════════╝");
     }
 
     public static void menuGuest(){
-        System.out.println("--------------- Menu Khách ---------------");
-        System.out.println("|           1.Hiển thị danh sách         |");
-        System.out.println("|           2.Tìm kiếm theo tên          |");
-        System.out.println("|           3.Mượn sách                  |");
-        System.out.println("|           4.Trả sách                   |");
-        System.out.println("|           5.Hiển thị sách mượn         |");
-        System.out.println("|           6.Quay lại                   |");
-        System.out.println("|           7.Thoát                      |");
-        System.out.println("------------------------------------------");
+        System.out.println("╔══════════════════  Khách ═══════════════╗");
+        System.out.println("║           1.Hiển thị danh sách          ║");
+        System.out.println("║           2.Tìm kiếm theo tên           ║");
+        System.out.println("║           3.Mượn sách                   ║");
+        System.out.println("║           4.Trả sách                    ║");
+        System.out.println("║           5.Hiển thị sách mượn          ║");
+        System.out.println("║           6.Quay lại                    ║");
+        System.out.println("║           7.Thoát                       ║");
+        System.out.println("╚═════════════════════════════════════════╝");
     }
 }

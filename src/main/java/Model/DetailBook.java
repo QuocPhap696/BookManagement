@@ -1,6 +1,6 @@
 package Model;
 
-public class detailBook {
+public class DetailBook {
     private int id;
     private int idBook;
     private int quantity;

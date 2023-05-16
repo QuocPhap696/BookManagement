@@ -65,5 +65,12 @@ public class BorrowBookService implements IBorrowBookService{
         CSVUtils.write(filename,list);
         CSVUtils.write(path,books);
    }
+
+   public boolean checkcontinue(int number){
+        if (number == 1){
+            return true;
+        } else
+            return false;
+   }
 }
-////tạo class mới(list browbookdetail -> id, bookId, quantity) -> cập nhật method mượn sách.
+

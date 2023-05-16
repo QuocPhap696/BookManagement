@@ -10,11 +10,18 @@ import java.util.Scanner;
 public class LoginUser {
     public User Login(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("*** Vui lòng đăng nhập để sử dụng ***");
-        System.out.println("Tên đăng nhập");
+        boolean checkNumber= false;
+        System.out.println("════════ Vui lòng đăng nhập để sử dụng ════════");
+        nochange();
+        System.out.println("════════    Tên đăng nhập    ════════");
         String username = scanner.nextLine();
-        System.out.println("Mật khẩu");
+        System.out.println("════════   Mật khẩu   ════════");
         String password = scanner.nextLine();
+        if (username.equals("0")) {
+            checkNumber = true;
+            Menu menu = new Menu();
+            menu.chon();
+        }
         Role role = confirm(username,password);
         return new User(username,password,role);
     }
@@ -28,11 +35,14 @@ public class LoginUser {
                     return Role.fromValue(fields[2]);
                 }
             }
-            throw new IllegalArgumentException("*** Tên đăng nhập hoặc mật khẩu sai ***");
+            throw new IllegalArgumentException("════════ Tên đăng nhập hoặc mật khẩu sai ════════");
         }catch (IllegalArgumentException e){
             throw e;
         } catch (Exception e){
-            throw new RuntimeException("Sai đường dẫn đến file CSV");
+            throw new RuntimeException("════════ Sai đường dẫn đến file CSV ════════");
         }
+    }
+    public void nochange(){
+        System.out.print("Nhấn 0 để quay trở lại");
     }
 }
