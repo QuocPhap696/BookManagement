@@ -446,49 +446,67 @@ public class BookView {
         List<BorrowBook> b = borrowBookService.getBorrowBook();
         List<Book> books = bookService.getBook();
         System.out.println("═══════ Danh sách hiển thị ═══════");
-        System.out.println("\t╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-        System.out.printf("\t\t%-10s %-25s %-25s %-25s %-25s ","ID","Số lượng","Tên sách","Ngày mượn","Ngày trả");
+        System.out.println("\t╔════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.printf("\t\t%-10s %-20s %-25s %-25s %-25s\n","ID","Số lượng","Tên sách","Tên người mượn","Ngày mượn");
         System.out.println("");
         for (BorrowBook borrowBook: b){
-
-               System.out.printf("\t\t%-10s %-25s %-25s %-25s %-25s\n", borrowBook.getId(), borrowBook.getBookid(),borrowBook.getName(), borrowBook.getBorrowdate(), borrowBook.getExpDate());
+               System.out.printf("\t\t%-10s %-20s %-25s %-25s %-25s\n", borrowBook.getId(), borrowBook.getBookid(),borrowBook.getNameBook(),borrowBook.getName(), borrowBook.getBorrowdate());
 
         }
-        System.out.println("\t╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+        System.out.println("\t╚════════════════════════════════════════════════════════════════════════════════════════════════════╝");
         menu.guest();
     }
 
 //    trả sách theo id
     public void returnBook(){
         int id =0;
+        int checkInput = -1;
         boolean checkNumber= false;
+        String name = null;
         do {
             try {
-            System.out.println("═ Nhập id sách mượn ═   ");
+                System.out.println("═ Nhập id sách đã mượn ═ ");
                 nochange();
-            id = Integer.parseInt(scanner.nextLine());
+                id = Integer.parseInt(scanner.nextLine());
+
+                System.out.println("═ Nhập tên người trả ═");
+                name = scanner.nextLine();
+                nochange();
 
             if (id == 0) {
                 checkNumber = true;
                 Menu menu = new Menu();
                 menu.guest();
             }
-
+                if (id < 0){
+                    System.out.println("═══════ ID phải lớn hơn 0 ═══════");
+                    continue;
+                }
+                checkInput = borrowBookService.checkexitsIDBorrowBook(id, name);
+                if (checkInput == 1){
+                    System.out.println("═══════ ID này không đúng ═══════");
+                } else if (checkInput == 2 ) {
+                    System.out.println("═══════ Tên người mượn không đúng ═══════");
+                }
             } catch (NumberFormatException e){
+                checkInput = -1;
                 System.out.println("═══════ Nhập số, không được nhập ký tự ═══════");
-                continue;
-            }
-            if (id < 0){
-                System.out.println("═══════ ID phải lớn hơn 0 ═══════");
-                continue;
-            }
-            if (!bookService.exitsProductId(id)){
-                System.out.println("═══════ ID này ko tồn tại ═══════");
             }
 
         }
+        while   (checkInput != 0);
+//
+//        do {
+//           try {
+//               System.out.println("Nhập tên người trả");
+//               name = scanner.nextLine();
+//           } catch (Exception e){
+//               System.out.println("Không được nhập số âm");
+//           } if (!borrowBookService.checkexitsname(name)){
+//               System.out.println("Tên người này không tồn tại");
+//           }
+//       } while ( !borrowBookService.checkexitsname(name));
 
-        while (!bookService.exitsProductId(id));
         List<BorrowBook> borrowBookList = new ArrayList<>();
         List<BorrowBook> b = borrowBookService.getBorrowBook();
         List<Book> books = bookService.getBook();
@@ -505,7 +523,7 @@ public class BookView {
         System.out.println("\t╚═════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
         int quantity = 0;
         for (BorrowBook returnBook1: b){
-                if (returnBook1.getId()==id){
+                if (returnBook1.getId()==id && returnBook1.getName().equals(name)){
                     quantity = returnBook1.getBookid();
                 }else {
                     borrowBookList.add(returnBook1);

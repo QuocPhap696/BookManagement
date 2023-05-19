@@ -72,5 +72,29 @@ public class BorrowBookService implements IBorrowBookService{
         } else
             return false;
    }
+   public boolean checkexitsname(String name){
+
+       List<BorrowBook> borrowBookList = getBorrowBook();
+        for (BorrowBook borrowBook: borrowBookList){
+            if (borrowBook.getName().equals(name)){
+                return true;
+            }
+        }
+        return false;
+   }
+   public int checkexitsIDBorrowBook(int id, String name){
+       List<BorrowBook> borrowBookList = getBorrowBook();
+       for (BorrowBook borrowBook : borrowBookList){
+           if (borrowBook.getId()!=id){
+               return 1; // 1 là id không trùng
+           }
+           if (!borrowBook.getName().equalsIgnoreCase(name)) {
+               return 2;
+           }
+           if(borrowBook.getId()==id && borrowBook.getName().equalsIgnoreCase(name)) {
+               return 0;
+           }
+       } return -1;
+   }
 }
 

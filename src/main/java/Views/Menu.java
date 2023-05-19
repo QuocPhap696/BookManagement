@@ -90,10 +90,10 @@ public class Menu {
     }
 
     public static void guest(){
-        boolean isLoggedIn = checkLogin();
-        if (!checkLogin()){
-            login();
-        }
+//        boolean isLoggedIn = checkLogin();
+//        if (!checkLogin()){
+//            login();
+//        }
         int number = 0;
         boolean checkAction = false;
         do {
